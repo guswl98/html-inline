@@ -46,10 +46,11 @@ module.exports = function (opts) {
     return tr;
 
     function fix (p) {
-        if(path.isAbsolute(p)) {
-            return path.resolve(basedir, path.relative('/', p));
+        const decodedPath = decodeURIComponent(p)
+        if(path.isAbsolute(decodedPath)) {
+            return path.resolve(basedir, path.relative('/', decodedPath));
         } else {
-            return path.resolve(basedir, p);
+            return path.resolve(basedir, decodedPath);
         }
     }
     function enc (s) {
